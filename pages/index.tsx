@@ -101,7 +101,7 @@ const Home: NextPage = () => {
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your age range of your targeted audience</p>
+            <p className="text-left font-medium">Select the age range of your targeted audience</p>
           </div>
           <div className="block">
             <DropDown age={age} setAge={(newAge) => setAge(newAge)} />
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
                     toast("Text copied to clipboard", { icon: "✂️" });
                   }}
                   >
-                  <p>{generatedCampaign.valueOf()}</p>
+                  <p>{generatedCampaign.valueOf().replace(/\/n/g, "<b>")}</p>
                 </div>
               </div>
             </>
