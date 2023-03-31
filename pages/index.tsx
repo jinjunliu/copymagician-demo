@@ -145,11 +145,11 @@ const Home: NextPage = () => {
                 <div
                   className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
                   onClick={() => {
-                    navigator.clipboard.writeText(generatedCampaign);
+                    navigator.clipboard.writeText(generatedCampaign.valueOf());
                     toast("Text copied to clipboard", { icon: "✂️" });
                   }}
                   >
-                  <p>{generatedCampaign}</p>
+                  <p>{generatedCampaign.valueOf()}</p>
                 </div>
               </div>
             </>
