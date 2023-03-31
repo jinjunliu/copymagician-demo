@@ -101,7 +101,7 @@ const Home: NextPage = () => {
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select the age range of your targeted audience</p>
+            <p className="text-left font-medium">Select the age range of your targeted audience.</p>
           </div>
           <div className="block">
             <DropDown age={age} setAge={(newAge) => setAge(newAge)} />
@@ -138,7 +138,7 @@ const Home: NextPage = () => {
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={productRef}
                 >
-                  Your generated advertisement campaign.
+                  Your generated ads campaign.
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
