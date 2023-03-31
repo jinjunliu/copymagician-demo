@@ -141,7 +141,7 @@ const Home: NextPage = () => {
                   Your generated advertisement campaign
                 </h2>
               </div>
-              <div className="space-y-8 flex flex-col max-w-xl mx-auto">
+              <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
                 <div
                   className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
                   onClick={() => {
