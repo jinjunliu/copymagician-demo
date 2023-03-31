@@ -149,7 +149,7 @@ const Home: NextPage = () => {
                     toast("Text copied to clipboard", { icon: "✂️" });
                   }}
                   >
-                  <p>{generatedCampaign}</p>
+                  <p>{generatedCampaign.valueOf()}</p>
                 </div>
               </div>
             </>
