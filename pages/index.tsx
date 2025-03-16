@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Github from "../components/GitHub";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
+import ReactMarkdown from 'react-markdown';
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -131,29 +132,31 @@ const Home: NextPage = () => {
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="space-y-10 my-10">
-          {generatedCampaign && (
-            <>
-              <div>
-                <h2
-                  className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
-                  ref={productRef}
-                >
-                  Your generated ads campaign.
-                </h2>
-              </div>
-              <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
-                <div
-                  className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
-                  onClick={() => {
-                    navigator.clipboard.writeText(generatedCampaign.valueOf());
-                    toast("Text copied to clipboard", { icon: "✂️" });
-                  }}
-                  >
-                  <p>{generatedCampaign.valueOf()}</p>
-                </div>
-              </div>
-            </>
-          )}
+        {generatedCampaign && (
+  <>
+    <div>
+      <h2
+        className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
+        ref={productRef}
+      >
+        Your generated ads campaign.
+      </h2>
+    </div>
+    <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
+      <div
+        className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
+        onClick={() => {
+          navigator.clipboard.writeText(generatedCampaign.valueOf());
+          toast("Text copied to clipboard", { icon: "✂️" });
+        }}
+      >
+        <ReactMarkdown className="prose">
+          {generatedCampaign.valueOf()}
+        </ReactMarkdown>
+      </div>
+    </div>
+  </>
+)}
         </div>
       </main>
       <Footer />
