@@ -150,9 +150,11 @@ const Home: NextPage = () => {
           toast("Text copied to clipboard", { icon: "✂️" });
         }}
       >
-        <ReactMarkdown className="prose">
-          {generatedCampaign.valueOf()}
-        </ReactMarkdown>
+        <div className="prose">
+          <ReactMarkdown>
+            {generatedCampaign.valueOf()}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   </>
