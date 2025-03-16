@@ -18,7 +18,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   const payload: OpenAIStreamPayload = {
-    model: "gpt-4o",
+    model: "deepseek-ai/DeepSeek-V3",
     messages: [{ role: "user", content: prompt }],
     temperature: 0.7,
     top_p: 1,
