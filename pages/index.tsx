@@ -143,14 +143,21 @@ const Home: NextPage = () => {
       </h2>
     </div>
     <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
-      <div
-        className="bg-white rounded-xl shadow-md p-4 border"
-      >
+      <div className="bg-white rounded-xl shadow-md p-4 border">
         <div className="prose">
           <ReactMarkdown>
             {generatedCampaign.valueOf()}
           </ReactMarkdown>
         </div>
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(generatedCampaign.valueOf());
+            toast("Text copied to clipboard", { icon: "✂️" });
+          }}
+          className="mt-2 px-4 py-2 bg-gray-100 rounded hover:bg-gray-200"
+        >
+          Copy to clipboard
+        </button>
       </div>
     </div>
   </>
