@@ -76,7 +76,7 @@ const Home: NextPage = () => {
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
-          Generate your ads campaign using chatGPT
+          Generate your ads campaign using AI
         </h1>
         <div className="max-w-xl w-full">
           <div className="flex mt-10 items-center space-x-3">
@@ -145,10 +145,10 @@ const Home: NextPage = () => {
     <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
       <div
         className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
-        onClick={() => {
-          navigator.clipboard.writeText(generatedCampaign.valueOf());
-          toast("Text copied to clipboard", { icon: "✂️" });
-        }}
+        // onClick={() => {
+        //   navigator.clipboard.writeText(generatedCampaign.valueOf());
+        //   toast("Text copied to clipboard", { icon: "✂️" });
+        // }}
       >
         <div className="prose">
           <ReactMarkdown>
