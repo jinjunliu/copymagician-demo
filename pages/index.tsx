@@ -28,42 +28,101 @@ const Home: NextPage = () => {
     product.endsWith(".") ? product.slice(0, -1) : product
   } targeting adults aged ${age}"`;
 
-  const generateBio = async (e: any) => {
+  // Add these new code here
+const validationPrompt = `Is the following input a product or service? Answer with only "yes" or "no": "${product}"`;
+
+const validateProduct = async () => {
+  const response = await fetch("/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: validationPrompt,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const data = response.body;
+  if (!data) {
+    return false;
+  }
+
+  const reader = data.getReader();
+  const decoder = new TextDecoder();
+  let result = "";
+  
+  let done = false;
+  while (!done) {
+    const { value, done: doneReading } = await reader.read();
+    done = doneReading;
+    const chunkValue = decoder.decode(value);
+    result += chunkValue;
+  }
+
+  return result.toLowerCase().includes('yes');
+};
+
+const generateBio = async (e: any) => {
     e.preventDefault();
-    setGeneratedCampaign("");
-    setLoading(true);
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    // This data is a ReadableStream
-    const data = response.body;
-    if (!data) {
+  
+    if (!product.trim()) {
+      toast.error("Please input a product or service.");
       return;
     }
-
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
-
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setGeneratedCampaign((prev) => prev + chunkValue);
+  
+    setLoading(true);
+  
+    try {
+      // Validate first
+      const isValid = await validateProduct();
+      
+      if (!isValid) {
+        toast.error("Please input a valid product or service.");
+        setLoading(false);
+        return;
+      }
+  
+      // If valid, proceed with campaign generation
+      setGeneratedCampaign("");
+      
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+  
+      const data = response.body;
+      if (!data) {
+        return;
+      }
+  
+      const reader = data.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+        setGeneratedCampaign((prev) => prev + chunkValue);
+      }
+      scrollToBios();
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    scrollToBios();
-    setLoading(false);
   };
 
   return (
