@@ -29,7 +29,14 @@ const Home: NextPage = () => {
   } targeting adults aged ${age}"`;
 
   // Add these new code here
-const validationPrompt = `Is the following input a product or service? Answer with only "yes" or "no": "${product}"`;
+const validationPrompt = `Analyze if the following input represents a product or service: "${product}"
+Consider these guidelines:
+- A product is a tangible or digital item that can be purchased
+- A service is an action or work provided by one party to another
+- Common nouns, abstract concepts, or random words are not valid
+- A declarative or imperative sentence that does not involve any products or services is not valid.
+
+Response format: Answer with only "yes" if it's clearly a product or service, or "no" if it's not.`;
 
 const validateProduct = async () => {
   const response = await fetch("/api/generate", {
