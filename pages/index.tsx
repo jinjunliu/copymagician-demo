@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = `As an advertiser, you'll create a campaign to promote a product or service by selecting a target audience, crafting key messages and slogans, choosing media channels for promotion, and planning additional activities to achieve your goals. Your reply should be in the language of the product or service. My first request is "Create an advertising campaign for ${
+  const prompt = `As an advertiser, you'll create a campaign to promote a product or service by selecting a target audience, crafting key messages and slogans, choosing media channels for promotion, and planning additional activities to achieve your goals. First, detect the language (e.g., English, Chinese) of the name of the product or service, then generate the campaign. **Your whole reply should be in the same language of the product or service.** My first request is "Create an advertising campaign for ${
     product.endsWith(".") ? product.slice(0, -1) : product
   } targeting adults aged ${age}"`;
 
